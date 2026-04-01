@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chilli Out Resto Cafe | Relax. Sip. Chill.</title>
+
+    <!-- SEO & Metadata -->
+    <meta name="description"
+        content="Chilli Out Resto Cafe in Cherai – your premium escape for gourmet flavors, cozy beachy vibes, and unforgettable moments. Relax. Sip. Chill.">
+    <meta name="keywords"
+        content="Chilli Out Cafe, Cherai Cafe, Kochi Resto Cafe, Beachy Cafe Kochi, Best Food Cherai, Chill Out Cafe Cherai">
+
+    <!-- OpenGraph (Social Sharing) -->
+    <meta property="og:title" content="Chilli Out Resto Cafe | Relax. Sip. Chill.">
+    <meta property="og:description"
+        content="Discover the best coastal vibes and gourmet treats at Chilli Out Cafe, Cherai">
+    <meta property="og:image" content="assets/images/pics/Logo.png">
+    <meta property="og:url" content="./">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/pics/Logo.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <!-- Using text as a fallback if logo is not provided. We will ask user about the logo image path later or we could use an IMG tag. I will use text styled like the given image for now, and an img tag. -->
+            <a href="#" class="nav-logo">
+                <img src="assets/images/pics/Logo.png" alt="Chilli Out Cafe"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="logo-text-fallback" style="display:none;">CHILLI OUT<br><small>Resto cafe</small></span>
+            </a>
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#location">Visit Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-wrapper">
+        <!-- Ambient Beachy Background Blobs -->
+        <div class="ambient-blob blob-1"></div>
+        <div class="ambient-blob blob-2"></div>
+        <div class="ambient-blob blob-3"></div>
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero section-dark">
+            <!-- Slideshow Background -->
+            <div class="hero-slideshow" id="heroSlideshow">
+                <div class="slide active" style="background-image: url('assets/images/pics/1.jpg')"></div>
+                <div class="slide" style="background-image: url('assets/images/pics/2.png')"></div>
+                <div class="slide" style="background-image: url('assets/images/pics/3.png')"></div>
+                <div class="slide" style="background-image: url('assets/images/pics/4.jpg')"></div>
+                <div class="slide" style="background-image: url('assets/images/pics/5.png')"></div>
+                <div class="slide" style="background-image: url('assets/images/pics/6.jpg')"></div>
+                <div class="hero-overlay"></div>
+            </div>
+
+
+
+            <div class="hero-content animate-on-scroll">
+                <h1 class="hero-title">
+                    <span class="word-mask"><span class="hero-word">Relax.</span></span><br>
+                    <span class="word-mask"><span class="hero-word">Sip.</span></span><br>
+                    <span class="word-mask"><span class="hero-word">Chill.</span></span>
+                </h1>
+                <p class="hero-subtitle">A Warm Sip by Cherai’s Shores</p>
+                <div class="hero-cta">
+                    <a href="#menu" class="btn btn-primary">Our Menu</a>
+                    <a href="#about" class="btn btn-outline">Our Story</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview Section -->
+        <section id="overview" class="overview section-light">
+            <div class="container animate-on-scroll">
+                <div class="overview-box glass-panel">
+                    <h2 class="section-heading split-heading text-center">
+                        <span class="slide-left block-span">Experience the</span>
+                        <span class="slide-right block-span">Warmth</span>
+                    </h2>
+                    <p class="section-text text-center">
+                        Discover a premium blend of flavors and moments. At Chilli Out Resto Cafe, we craft more than
+                        just food—we craft memories in an ambiance designed exclusively for your comfort.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Menu Section -->
+        <section id="menu" class="menu section-warm">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <span class="subheading">Taste the best</span>
+                    <h2 class="section-heading">Featured Menu</h2>
+                </div>
+
+                <div class="menu-grid">
+                    <!-- Card 1 -->
+                    <div class="menu-card glass-card animate-on-scroll">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/food/Burger.jpg" alt="Premium Burger" class="menu-img">
+                        </div>
+                        <div class="card-content">
+                            <h3>Gourmet Burger</h3>
+                            <p>Juicy patty with fresh veggies and chef's special sauce.</p>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="menu-card glass-card animate-on-scroll">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/food/Pizza.jpg" alt="Wood-fired Pizza" class="menu-img">
+                        </div>
+                        <div class="card-content">
+                            <h3>Signature Pizza</h3>
+                            <p>Hand-tossed crust with premium toppings and gooey cheese.</p>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="menu-card glass-card animate-on-scroll">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/food/Pasta.jpg" alt="Creamy Pasta" class="menu-img">
+                        </div>
+                        <div class="card-content">
+                            <h3>Creamy Pasta</h3>
+                            <p>Rich, velvety sauce with herbs and parmesan.</p>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="menu-card glass-card animate-on-scroll">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/food/Seafood.jpg" alt="Fresh Seafood" class="menu-img">
+                        </div>
+                        <div class="card-content">
+                            <h3>Ocean's Delight</h3>
+                            <p>Catch of the day grilled to perfection with lemon butter.</p>
+                        </div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="menu-card glass-card animate-on-scroll">
+                        <div class="card-img-wrapper">
+                            <img src="assets/images/food/Lobster.jpg" alt="Special Lobster" class="menu-img">
+                        </div>
+                        <div class="card-content">
+                            <h3>Royal Lobster</h3>
+                            <p>An exquisite delicacy prepared with exotic spices.</p>
+                        </div>
+                    </div>
+                    <!-- Card 6: View Full Menu -->
+                    <a href="menu/index.html"
+                        class="menu-card glass-card full-menu-card animate-on-scroll">
+                        <div class="full-menu-content">
+                            <div class="icon-circle">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
+                            <h3>View Full Menu</h3>
+                            <p>Explore all our offerings</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about section-light">
+            <div class="container">
+                <div class="about-flex animate-on-scroll">
+                    <div class="about-content">
+                        <span class="subheading">Our Story</span>
+                        <h2 class="section-heading text-center split-heading">
+                            <span class="slide-left block-span">Where Passion</span>
+                            <span class="slide-right block-span">Meets the Plate</span>
+                        </h2>
+                        <p class="section-text">
+                            Chilli Out Resto Cafe was born from a love for authentic flavors and cozy atmospheres.
+                            We believe in taking a moment to sit back, relax, and savor life's simple pleasures.
+                            Whether it's a quick coffee or a hearty meal with loved ones, we promise an unforgettable
+                            experience.
+                        </p>
+                        <div class="hours-box glass-panel-dark">
+                            <i class="fa-regular fa-clock"></i>
+                            <div>
+                                <h4>Opening Hours</h4>
+                                <p>Daily: 9:30 AM – 10:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <!-- Reusing a nice cafe image -->
+                        <div class="img-frame">
+                            <img src="assets/images/pics/3.png" alt="Cafe Interior">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instagram / Contact Section -->
+        <section id="contact" class="instagram section-warm">
+            <div class="scroll-heading-container animate-on-scroll">
+                <!-- String is highly elongated so the 50% shift loop is undetectable! -->
+                <h2 class="scroll-heading">JOIN THE VIBE &nbsp;&nbsp; JOIN THE VIBE &nbsp;&nbsp; JOIN THE VIBE
+                    &nbsp;&nbsp; JOIN THE VIBE &nbsp;&nbsp; JOIN THE VIBE &nbsp;&nbsp; JOIN THE VIBE &nbsp;&nbsp; JOIN
+                    THE VIBE &nbsp;&nbsp; JOIN THE VIBE &nbsp;&nbsp; JOIN THE VIBE &nbsp;&nbsp; JOIN THE VIBE
+                    &nbsp;&nbsp; JOIN THE VIBE &nbsp;&nbsp; JOIN THE VIBE &nbsp;&nbsp; JOIN THE VIBE &nbsp;&nbsp; JOIN
+                    THE VIBE &nbsp;&nbsp; JOIN THE VIBE &nbsp;&nbsp; JOIN THE VIBE &nbsp;&nbsp;</h2>
+            </div>
+
+            <div class="container animate-on-scroll">
+                <div class="section-header parallax-vertical" data-speed="0.1">
+                    <h2 class="section-heading text-center split-heading">
+                        <span class="slide-left block-span" style="color: var(--clr-brown-800);">Follow Us</span>
+                        <span class="slide-right block-span" style="color: var(--clr-orange-soft);">On Instagram</span>
+                    </h2>
+                </div>
+
+                <div class="insta-collage animate-on-scroll stagger-children">
+                    <!-- Scattered Instagram Pics with wrappers to separate entrance from scroll-linked movement -->
+                    <div class="insta-pic-wrapper pic-1-wrap">
+                        <img src="assets/images/pics/3.png" class="insta-pic pic-1" alt="Cafe Vibe 1">
+                    </div>
+                    <div class="insta-pic-wrapper pic-2-wrap">
+                        <img src="assets/images/pics/1.jpg" class="insta-pic pic-2" alt="Cafe Vibe 2">
+                    </div>
+                    <div class="insta-pic-wrapper pic-3-wrap">
+                        <img src="assets/images/pics/6.jpg" class="insta-pic pic-3" alt="Cafe Vibe 3">
+                    </div>
+                    <div class="insta-pic-wrapper pic-4-wrap">
+                        <img src="assets/images/pics/2.png" class="insta-pic pic-4" alt="Cafe Vibe 4">
+                    </div>
+                </div>
+
+                <div class="text-center animate-on-scroll parallax-vertical" data-speed="0.15"
+                    style="margin-top: 5.5rem; margin-bottom: 4rem;">
+                    <a href="https://www.instagram.com/chillioutcafe_official/" target="_blank" class="btn btn-primary"
+                        style="font-size: 1.25rem; padding: 1rem 3rem; border-radius: 50px; box-shadow: 0 10px 25px var(--clr-orange-glow);">
+                        <i class="fa-brands fa-instagram" style="margin-right: 12px; font-size: 1.5rem;"></i> Follow Us
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location / Visit Us Section -->
+        <section id="location" class="location section-light">
+            <div class="container animate-on-scroll">
+                <div class="location-flex">
+                    <!-- Left Side: Text & Actions -->
+                    <div class="location-content">
+                        <span class="subheading">Find Us</span>
+                        <h2 class="section-heading text-left">
+                            <span class="block-span">Visit Us At</span>
+                            <span class="block-span" style="color: var(--clr-orange-soft);">Chilli Out</span>
+                        </h2>
+                        <p class="section-text" style="margin: 0 0 2rem 0;">
+                            Drop by to experience the best coastal cafe vibes in town. We're perfectly tucked away in
+                            Vypin. Come for the aesthetic, stay for the warmth!
+                        </p>
+                        <div class="location-actions">
+                            <a href="https://wa.me/919447396960" target="_blank" class="btn whatsapp-btn">
+                                <i class="fa-brands fa-whatsapp" style="margin-right: 8px;"></i> Chat on WhatsApp
+                            </a>
+                            <a href="https://www.google.com/maps/dir//Chilli+out+Cafe,+Cherai+Beach+-+Munambam+Rd,+Cherai,+Kochi,+Kerala+683514/@10.1452682,76.1773981,17z/data=!4m16!1m7!3m6!1s0x3b0819ff9480b06b:0xd41b024750123d9a!2sChilli+out+Cafe!8m2!3d10.1452161!4d76.177243!16s%2Fg%2F11xcs9y8x!4m7!1m0!1m5!1m1!1s0x3b0819ff9480b06b:0xd41b024750123d9a!2m2!1d76.177243!2d10.1452161?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D"
+                                target="_blank" class="btn btn-outline-dark directions-btn">
+                                <i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i> Directions
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Clean Map Embed -->
+                    <div class="location-map glass-card">
+                        <!-- Invisible click overlay over the iframe to hijack clicks -->
+                        <a href="https://www.google.com/maps/dir//Chilli+out+Cafe,+Cherai+Beach+-+Munambam+Rd,+Cherai,+Kochi,+Kerala+683514/@10.1452682,76.1773981,17z/data=!4m16!1m7!3m6!1s0x3b0819ff9480b06b:0xd41b024750123d9a!2sChilli+out+Cafe!8m2!3d10.1452161!4d76.177243!16s%2Fg%2F11xcs9y8x!4m7!1m0!1m5!1m1!1s0x3b0819ff9480b06b:0xd41b024750123d9a!2m2!1d76.177243!2d10.1452161?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D"
+                            target="_blank" style="position: absolute; inset: 0; z-index: 10;"
+                            aria-label="Get Directions on Google Maps"></a>
+
+                        <!-- Best effort simple Google Map embed iframe using their coordinates in Satellite mode -->
+                        <iframe
+                            src="https://maps.google.com/maps?q=Chilli%20out%20Cafe,%20Vypin&t=k&z=17&ie=UTF8&iwloc=&output=embed"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/images/pics/Logo.png" alt="Chilli Out Logo" class="footer-logo">
+                    <p style="color: rgba(255,255,255,0.6); max-width: 300px; margin: 0 auto; line-height: 1.6;">Your
+                        premium escape in Vypin. Bringing you the finest blends of taste and comfort under the coastal
+                        sun.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#about">Our Story</a></li>
+                        <li><a href="#location">Find Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Reach Us</h4>
+                    <p><i class="fa-solid fa-location-dot" style="margin-right: 8px;"></i> Cherai Beach - Munambam Rd,
+                        Cherai, Kochi, Kerala 683514</p>
+                    <p><i class="fa-solid fa-phone" style="margin-right: 8px;"></i> +91 9447396960</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/chillioutcafe/" target="_blank"><i
+                                class="fa-brands fa-instagram"></i></a>
+                        <a href="https://wa.me/919447396960" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="https://www.google.com/maps/dir//Chilli+out+Cafe/" target="_blank"><i
+                                class="fa-solid fa-map-location-dot"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom text-center">
+                <p>&copy; 2024 Chilli Out Resto Cafe. All Rights Reserved. Crafted with love.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="js/main.js?v=7"></script>
+</body>
+
+</html>
