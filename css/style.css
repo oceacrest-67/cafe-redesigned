@@ -112,14 +112,14 @@ img {
 
 @media (max-width: 768px) {
     .glass-panel, .glass-card, .glass-card-dark, .navbar.scrolled {
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(4px) !important;
+        -webkit-backdrop-filter: blur(4px) !important;
+        background: rgba(255, 255, 255, 0.85);
     }
     .glass-panel-dark {
-        background: rgba(62, 39, 35, 0.95);
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
+        background: rgba(62, 39, 35, 0.9);
+        backdrop-filter: blur(4px) !important;
+        -webkit-backdrop-filter: blur(4px) !important;
     }
 }
 
@@ -300,7 +300,11 @@ section {
 
 @media (max-width: 768px) {
     .ambient-blob {
-        display: none !important;
+        filter: blur(30px);
+        width: 40vw;
+        height: 40vw;
+        opacity: 0.4;
+        animation: none; /* No movement on mobile to save power */
     }
 }
 

@@ -107,38 +107,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Staggered Menu Cards
     const menuCards = gsap.utils.toArray('.menu-card');
     menuCards.forEach((card, i) => {
-        if (isMobile) {
-            // Simple entrance for mobile
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 95%",
-                    toggleActions: "play none none none"
-                },
-                y: 20,
-                opacity: 0,
-                duration: 0.6,
-                ease: "power2.out"
-            });
-        } else {
-            // Premium animation for desktop
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 98%", 
-                    end: "top 70%",
-                    scrub: 0.8,
-                },
-                y: 30,
-                rotationX: 15,
-                rotationY: (i % 2 === 0 ? -5 : 5),
-                scale: 0.95,
-                opacity: 0,
-                filter: "blur(8px)",
-                ease: "none",
-                clearProps: "all"
-            });
-        }
+        gsap.from(card, {
+            scrollTrigger: {
+                trigger: card,
+                start: "top 98%", 
+                end: isMobile ? "top 85%" : "top 70%",
+                scrub: isMobile ? 0.4 : 0.8, // Light scrub on mobile for a sense of motion
+            },
+            y: 20,
+            rotationX: isMobile ? 0 : 15, // No 3D on mobile
+            scale: 0.96,
+            opacity: 0,
+            ease: "none",
+            clearProps: "all"
+        });
     });
 
     // 3. Clip-Path Reveal for About Image
@@ -158,12 +140,12 @@ document.addEventListener('DOMContentLoaded', () => {
         );
         
         const innerImg = aboutImgFrame.querySelector('img');
-        if(innerImg && !isMobile) {
+        if(innerImg) {
             gsap.fromTo(innerImg, 
-                { scale: 1.1, y: -20 },
+                { scale: isMobile ? 1.05 : 1.1, y: isMobile ? -10 : -20 },
                 {
-                    scale: 1.05,
-                    y: 20,
+                    scale: 1,
+                    y: isMobile ? 10 : 20,
                     scrollTrigger: {
                         trigger: '#about',
                         start: "top bottom",
@@ -181,34 +163,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const leftBox = heading.querySelectorAll('.slide-left');
         const rightBox = heading.querySelectorAll('.slide-right');
         
-        if (isMobile) {
-            // No scrub on mobile for split headings
-            gsap.from([leftBox, rightBox], {
-                scrollTrigger: {
-                    trigger: heading,
-                    start: "top 90%",
-                    toggleActions: "play none none none"
-                },
-                x: (i, target) => target.classList.contains('slide-left') ? -20 : 20,
-                opacity: 0,
-                duration: 0.8,
-                ease: "power2.out"
-            });
-        } else {
-            let tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: heading,
-                    start: "top 100%",
-                    end: "bottom 0%",
-                    scrub: true
-                }
-            });
-            const distance = window.innerWidth * 0.25; 
-            tl.fromTo(leftBox, { x: -distance }, { x: 0, ease: "none", duration: 1 }, 0);
-            tl.fromTo(rightBox, { x: distance }, { x: 0, ease: "none", duration: 1 }, 0);
-            tl.to(leftBox, { x: distance, ease: "none", duration: 1 });
-            tl.to(rightBox, { x: -distance, ease: "none", duration: 1 }, "<");
-        }
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: heading,
+                start: "top 100%",
+                end: "bottom 0%",
+                scrub: isMobile ? 0.5 : true
+            }
+        });
+        
+        const distance = window.innerWidth * (isMobile ? 0.15 : 0.25); 
+        
+        tl.fromTo(leftBox, { x: -distance }, { x: 0, ease: "none", duration: 1 }, 0);
+        tl.fromTo(rightBox, { x: distance }, { x: 0, ease: "none", duration: 1 }, 0);
+        
+        tl.to(leftBox, { x: distance, ease: "none", duration: 1 });
+        tl.to(rightBox, { x: -distance, ease: "none", duration: 1 }, "<");
     });
 
     // 5. Instagram Gallery
@@ -235,39 +205,39 @@ document.addEventListener('DOMContentLoaded', () => {
             }, i * 0.08);
         });
 
-        if (!isMobile) {
-            instaPics.forEach((pic, i) => {
-                const yVal = [ -60, 40, -80, 70 ][i] || 0;
-                const rotVal = [ 8, -6, -5, 6 ][i] || 0;
-                
-                gsap.to(pic, {
-                    y: yVal, 
-                    rotation: rotVal,
-                    scrollTrigger: {
-                        trigger: instaCollage,
-                        start: "top 70%",
-                        end: "bottom 10%",
-                        scrub: 1.5
-                    },
-                    ease: "none"
-                });
+        // Restore parallax movement for photos on mobile, but with lower values
+        instaPics.forEach((pic, i) => {
+            const yVal = isMobile ? [ -30, 20, -40, 30 ][i] : [ -60, 40, -80, 70 ][i];
+            const rotVal = isMobile ? [ 4, -3, -2, 3 ][i] : [ 8, -6, -5, 6 ][i];
+            
+            gsap.to(pic, {
+                y: yVal || 0, 
+                rotation: rotVal || 0,
+                scrollTrigger: {
+                    trigger: instaCollage,
+                    start: "top 75%",
+                    end: "bottom 15%",
+                    scrub: isMobile ? 0.8 : 1.5
+                },
+                ease: "none"
             });
+        });
 
-            // Glow effect only for desktop
-            instaPics.forEach(pic => {
-                gsap.to(pic, {
-                    boxShadow: "0 20px 50px rgba(217, 140, 112, 0.3)",
-                    scrollTrigger: {
-                        trigger: pic,
-                        start: "top 80%",
-                        end: "top 40%",
-                        scrub: 1
-                    },
-                    ease: "none"
-                });
+        // Subtle glow effect
+        instaPics.forEach(pic => {
+            gsap.to(pic, {
+                boxShadow: isMobile ? "0 10px 30px rgba(217, 140, 112, 0.2)" : "0 20px 50px rgba(217, 140, 112, 0.3)",
+                scrollTrigger: {
+                    trigger: pic,
+                    start: "top 85%",
+                    end: "top 45%",
+                    scrub: 1
+                },
+                ease: "none"
             });
-        }
+        });
     }
+
 
 });
 
