@@ -110,6 +110,19 @@ img {
     box-shadow: var(--shadow-soft);
 }
 
+@media (max-width: 768px) {
+    .glass-panel, .glass-card, .glass-card-dark, .navbar.scrolled {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(255, 255, 255, 0.95);
+    }
+    .glass-panel-dark {
+        background: rgba(62, 39, 35, 0.95);
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+}
+
 .glass-panel-dark {
     background: rgba(62, 39, 35, 0.85);
     backdrop-filter: blur(10px);
@@ -283,6 +296,12 @@ section {
     background: rgba(217, 140, 112, 0.1);
     top: 75%; right: -10vw;
     animation-delay: -8s;
+}
+
+@media (max-width: 768px) {
+    .ambient-blob {
+        display: none !important;
+    }
 }
 
 @keyframes blobFloat {
@@ -763,6 +782,16 @@ section {
     z-index: 10;
     transform: translateZ(0);
     transform-style: preserve-3d;
+}
+
+@media (max-width: 768px) {
+    .insta-pic {
+        transform-style: flat;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .scroll-heading {
+        animation-duration: 35s; /* Slow it down for better performance */
+    }
 }
 
 .insta-pic:hover {

@@ -88,20 +88,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const fadeElements = gsap.utils.toArray('.animate-on-scroll:not(.insta-collage):not(.menu-grid):not(.scroll-heading-container):not(.menu-card)');
     fadeElements.forEach(el => {
         gsap.fromTo(el, 
-            { y: 40, opacity: 0, filter: isMobile ? "none" : "blur(10px)", scale: 0.98 },
+            { y: 30, opacity: 0, scale: 0.98 },
             {
                 scrollTrigger: {
                     trigger: el,
-                    start: "top 90%",
+                    start: "top 92%",
                     toggleActions: "play none none none"
                 },
                 y: 0,
                 opacity: 1,
-                filter: "blur(0px)",
                 scale: 1,
-                duration: 1,
-                ease: "power3.out",
-                clearProps: "filter"
+                duration: 0.8,
+                ease: "power2.out"
             }
         );
     });
@@ -109,23 +107,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Staggered Menu Cards
     const menuCards = gsap.utils.toArray('.menu-card');
     menuCards.forEach((card, i) => {
-        gsap.from(card, {
-            scrollTrigger: {
-                trigger: card,
-                start: "top 98%", 
-                end: "top 70%",
-                scrub: isMobile ? false : 0.8, // Disable scrub on mobile for better performance
-            },
-            y: 30,
-            rotationX: isMobile ? 0 : 15,
-            rotationY: isMobile ? 0 : (i % 2 === 0 ? -5 : 5),
-            scale: 0.95,
-            opacity: 0,
-            duration: isMobile ? 0.8 : 1,
-            filter: isMobile ? "none" : "blur(8px)",
-            ease: isMobile ? "power2.out" : "none",
-            clearProps: "all"
-        });
+        if (isMobile) {
+            // Simple entrance for mobile
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 95%",
+                    toggleActions: "play none none none"
+                },
+                y: 20,
+                opacity: 0,
+                duration: 0.6,
+                ease: "power2.out"
+            });
+        } else {
+            // Premium animation for desktop
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 98%", 
+                    end: "top 70%",
+                    scrub: 0.8,
+                },
+                y: 30,
+                rotationX: 15,
+                rotationY: (i % 2 === 0 ? -5 : 5),
+                scale: 0.95,
+                opacity: 0,
+                filter: "blur(8px)",
+                ease: "none",
+                clearProps: "all"
+            });
+        }
     });
 
     // 3. Clip-Path Reveal for About Image
@@ -137,10 +150,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
                 scrollTrigger: {
                     trigger: '#about',
-                    start: "top 80%",
+                    start: "top 85%",
                 },
-                duration: 1.5,
-                ease: "power4.inOut"
+                duration: 1.2,
+                ease: "power3.inOut"
             }
         );
         
@@ -168,22 +181,34 @@ document.addEventListener('DOMContentLoaded', () => {
         const leftBox = heading.querySelectorAll('.slide-left');
         const rightBox = heading.querySelectorAll('.slide-right');
         
-        let tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: heading,
-                start: "top 100%",
-                end: "bottom 0%",
-                scrub: isMobile ? 0.5 : true // Slightly snappier scrub on mobile
-            }
-        });
-        
-        const distance = window.innerWidth * 0.25; 
-        
-        tl.fromTo(leftBox, { x: -distance }, { x: 0, ease: "none", duration: 1 }, 0);
-        tl.fromTo(rightBox, { x: distance }, { x: 0, ease: "none", duration: 1 }, 0);
-        
-        tl.to(leftBox, { x: distance, ease: "none", duration: 1 });
-        tl.to(rightBox, { x: -distance, ease: "none", duration: 1 }, "<");
+        if (isMobile) {
+            // No scrub on mobile for split headings
+            gsap.from([leftBox, rightBox], {
+                scrollTrigger: {
+                    trigger: heading,
+                    start: "top 90%",
+                    toggleActions: "play none none none"
+                },
+                x: (i, target) => target.classList.contains('slide-left') ? -20 : 20,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power2.out"
+            });
+        } else {
+            let tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: heading,
+                    start: "top 100%",
+                    end: "bottom 0%",
+                    scrub: true
+                }
+            });
+            const distance = window.innerWidth * 0.25; 
+            tl.fromTo(leftBox, { x: -distance }, { x: 0, ease: "none", duration: 1 }, 0);
+            tl.fromTo(rightBox, { x: distance }, { x: 0, ease: "none", duration: 1 }, 0);
+            tl.to(leftBox, { x: distance, ease: "none", duration: 1 });
+            tl.to(rightBox, { x: -distance, ease: "none", duration: 1 }, "<");
+        }
     });
 
     // 5. Instagram Gallery
@@ -202,12 +227,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         instaWrappers.forEach((wrapper, i) => {
             entranceTl.from(wrapper, {
-                y: 40,
+                y: 30,
                 opacity: 0,
-                scale: 0.9,
-                duration: 0.8,
+                scale: 0.95,
+                duration: 0.6,
                 ease: "power2.out"
-            }, i * 0.1);
+            }, i * 0.08);
         });
 
         if (!isMobile) {
@@ -227,22 +252,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     ease: "none"
                 });
             });
-        }
 
-        // Glow effect simplified
-        instaPics.forEach(pic => {
-            gsap.to(pic, {
-                boxShadow: "0 20px 50px rgba(217, 140, 112, 0.3)",
-                scrollTrigger: {
-                    trigger: pic,
-                    start: "top 80%",
-                    end: "top 40%",
-                    scrub: 1
-                },
-                ease: "none"
+            // Glow effect only for desktop
+            instaPics.forEach(pic => {
+                gsap.to(pic, {
+                    boxShadow: "0 20px 50px rgba(217, 140, 112, 0.3)",
+                    scrollTrigger: {
+                        trigger: pic,
+                        start: "top 80%",
+                        end: "top 40%",
+                        scrub: 1
+                    },
+                    ease: "none"
+                });
             });
-        });
+        }
     }
+
 });
 
 
