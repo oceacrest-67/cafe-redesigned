@@ -104,20 +104,24 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     });
 
-    // 2. Staggered Menu Cards
+    // 2. Staggered Menu Cards (Optimized 3D Fly-In)
     const menuCards = gsap.utils.toArray('.menu-card');
     menuCards.forEach((card, i) => {
         gsap.from(card, {
             scrollTrigger: {
                 trigger: card,
                 start: "top 98%", 
-                end: isMobile ? "top 85%" : "top 70%",
-                scrub: isMobile ? 0.4 : 0.8, // Light scrub on mobile for a sense of motion
+                end: isMobile ? "top 80%" : "top 65%",
+                scrub: isMobile ? 0.5 : 0.8,
             },
-            y: 20,
-            rotationX: isMobile ? 0 : 15, // No 3D on mobile
-            scale: 0.96,
+            y: isMobile ? 30 : 50,
+            rotationX: 25,  
+            rotationY: i % 2 === 0 ? -10 : 10,
+            rotationZ: i % 2 === 0 ? -3 : 3,
+            scale: 0.85,
+            transformPerspective: 1200,
             opacity: 0,
+            filter: isMobile ? "none" : "blur(10px)", // Remove blur on mobile for speed
             ease: "none",
             clearProps: "all"
         });
