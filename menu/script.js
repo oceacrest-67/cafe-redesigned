@@ -27,6 +27,9 @@ const $closeModal = document.getElementById('close-modal');
 
 // ── Initialization ──
 async function initMenu() {
+    // GSAP Performance Optimization
+    gsap.ticker.lagSmoothing(1000, 16);
+    
     showSkeletons();
     try {
         const response = await fetch(`${DATA_ROOT}index.json`);
@@ -142,7 +145,7 @@ function createMenuCard(item, index) {
     card.innerHTML = `
         <div class="card-img-wrapper">
             <div class="type-indicator ${isVeg ? 'veg' : 'non-veg'}"></div>
-            <img src="${item.imagePath}" alt="${item.name}" loading="lazy" onerror="this.src='../assets/images/pics/Logo.png'">
+            <img src="${item.imagePath}" alt="${item.name}" loading="lazy" decoding="async" onerror="this.src='../assets/images/pics/Logo.png'">
         </div>
         <div class="card-body">
             <h3 class="card-title">${item.name}</h3>
@@ -171,10 +174,16 @@ function createMenuCard(item, index) {
 }
 
 // ── Search Logic ──
+let searchTimeout;
 $searchInput.oninput = (e) => {
-    searchQuery = e.target.value.toLowerCase().trim();
-    $clearSearch.classList.toggle('visible', searchQuery.length > 0);
-    renderMenu();
+    const val = e.target.value.toLowerCase().trim();
+    $clearSearch.classList.toggle('visible', val.length > 0);
+    
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+        searchQuery = val;
+        renderMenu();
+    }, 200);
 };
 
 $clearSearch.onclick = () => {

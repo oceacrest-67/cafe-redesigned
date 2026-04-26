@@ -264,6 +264,8 @@ html, body {
     border: 1px solid rgba(0,0,0,0.03);
     position: relative;
     opacity: 0; /* Entrance animation */
+    will-change: transform, opacity;
+    transform: translateZ(0);
 }
 
 .menu-card:hover {
@@ -410,6 +412,8 @@ html, body {
     position: relative;
     max-height: 92vh;
     overflow-y: auto;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .modal-handle-bar {

@@ -183,7 +183,7 @@ section {
 
 .block-span {
     display: block;
-    will-change: transform;
+    will-change: transform, opacity;
 }
 
 .subheading {
@@ -302,6 +302,7 @@ section {
 .hero-word {
     display: inline-block;
     will-change: transform, opacity;
+    transform: translateZ(0);
 }
 
 
@@ -449,6 +450,14 @@ section {
     opacity: 0;
     transform: scale(1.05);
     transition: opacity 1.5s ease, transform 6s linear;
+    will-change: opacity, transform;
+}
+
+@media (max-width: 768px) {
+    .slide {
+        transform: scale(1);
+        transition: opacity 1.2s ease;
+    }
 }
 
 .slide.active {
@@ -529,6 +538,8 @@ section {
     display: flex;
     flex-direction: column;
     border-radius: var(--border-radius-m);
+    will-change: transform, opacity;
+    transform: translateZ(0);
 }
 
 .card-img-wrapper {
@@ -730,6 +741,7 @@ section {
     position: relative;
     z-index: 10;
     will-change: transform, opacity;
+    transform: translateZ(0);
 }
 
 /* THE BEAUTY OF DISALIGNMENT — Outward tilts & organic offsets */
@@ -747,8 +759,9 @@ section {
     box-shadow: 0 15px 35px rgba(47, 62, 70, 0.15);
     border: 8px solid var(--clr-white); /* Beach aesthetic polaroid frame */
     border-bottom-width: 24px;
-    will-change: transform, filter;
+    will-change: transform, filter, box-shadow;
     z-index: 10;
+    transform: translateZ(0);
     transform-style: preserve-3d;
 }
 
