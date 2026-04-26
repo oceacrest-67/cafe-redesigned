@@ -1,0 +1,130 @@
+{
+  "categories": [
+    {
+      "id": "starters",
+      "name": "Starters",
+      "icon": "🥗",
+      "items": ["item-1", "item-2"]
+    },
+    {
+      "id": "main-course",
+      "name": "Main Course",
+      "icon": "🍽️",
+      "items": ["item-1"]
+    },
+    {
+      "id": "salads",
+      "name": "Salads",
+      "icon": "🥗",
+      "items": []
+    },
+    {
+      "id": "pasta",
+      "name": "Pasta",
+      "icon": "🍝",
+      "items": []
+    },
+    {
+      "id": "sandwiches",
+      "name": "Sandwiches",
+      "icon": "🥪",
+      "items": []
+    },
+    {
+      "id": "burgers",
+      "name": "Burgers",
+      "icon": "🍔",
+      "items": []
+    },
+    {
+      "id": "crepes",
+      "name": "Crepes",
+      "icon": "🥞",
+      "items": []
+    },
+    {
+      "id": "pizza",
+      "name": "Pizza",
+      "icon": "🍕",
+      "items": []
+    },
+    {
+      "id": "beverages-fresh-juice",
+      "name": "Beverages-Fresh Juice",
+      "icon": "🧃",
+      "items": []
+    },
+    {
+      "id": "beverages-coffee",
+      "name": "Beverages-Coffee",
+      "icon": "☕",
+      "items": []
+    },
+    {
+      "id": "beverages-tea",
+      "name": "Beverages-Tea",
+      "icon": "🍵",
+      "items": []
+    },
+    {
+      "id": "beverages-ice-tea",
+      "name": "Beverages-Ice Tea",
+      "icon": "🧊",
+      "items": []
+    },
+    {
+      "id": "beverages-mojitos",
+      "name": "Beverages-Mojitos",
+      "icon": "🍹",
+      "items": []
+    },
+    {
+      "id": "beverages-red-bull-mocktails",
+      "name": "Beverages-Red Bull Mocktails",
+      "icon": "🧋",
+      "items": []
+    },
+    {
+      "id": "beverages-energy-drinks",
+      "name": "Beverages-Energy Drinks",
+      "icon": "⚡",
+      "items": []
+    },
+    {
+      "id": "beverages-mocktails",
+      "name": "Beverages-Mocktails",
+      "icon": "🥤",
+      "items": []
+    },
+    {
+      "id": "beverages-water",
+      "name": "Beverages-Water",
+      "icon": "💧",
+      "items": []
+    },
+    {
+      "id": "beverages-lassi",
+      "name": "Beverages-Lassi",
+      "icon": "🥛",
+      "items": []
+    },
+    {
+      "id": "beverages-milk-shake",
+      "name": "Beverages-Milk Shake",
+      "icon": "🥤",
+      "items": []
+    },
+    {
+      "id": "breakfast",
+      "name": "Breakfast",
+      "icon": "🍳",
+      "items": []
+    },
+    {
+      "id": "dessert",
+      "name": "Dessert",
+      "icon": "🍨",
+      "items": []
+    }
+  ]
+}

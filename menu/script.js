@@ -1,5 +1,5 @@
 /* 
-    Chilli Out Cafe - Menu Component Logic
+    Brew & Byte - Menu Component Logic
     Dynamic Fetch-Based Menu Rendering
 */
 

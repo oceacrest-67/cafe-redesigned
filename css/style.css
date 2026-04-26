@@ -833,9 +833,25 @@ section {
     text-align: center;
 }
 
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
 .footer-brand .footer-logo {
-    max-width: 140px; /* Smaller logo */
-    margin-bottom: 1rem;
+    max-width: 120px;
+    margin: 0;
+}
+
+.footer-description {
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 400px;
+    margin: 0;
+    line-height: 1.6;
+    font-size: 0.95rem;
 }
 
 .footer-links h4, .footer-contact h4 {
@@ -982,10 +998,31 @@ section {
     }
 
     .footer-grid {
-        grid-template-columns: 2fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         text-align: left;
+        gap: 3rem;
     }
     
+    .footer-brand {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        gap: 3rem;
+        margin-bottom: 2rem;
+        padding-bottom: 2.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        justify-content: flex-start;
+    }
+
+    .footer-brand .footer-logo {
+        max-width: 150px;
+    }
+
+    .footer-description {
+        max-width: 600px;
+    }
+
     .footer-socials {
         justify-content: flex-start;
     }
