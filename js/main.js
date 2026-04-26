@@ -2,27 +2,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Register GSAP Plugins ---
     gsap.registerPlugin(ScrollTrigger);
 
+    // --- Performance Optimization: Lag Smoothing ---
+    gsap.ticker.lagSmoothing(1000, 16);
+
+    // Detect mobile for simplified animations
+    const isMobile = window.innerWidth < 768;
+
     // --- Hero Animation (Immediate Load) ---
-    // Target Hero Elements
     const heroTitle = document.querySelector('.hero-title');
     const heroWords = gsap.utils.toArray('.hero-word');
     const heroSubtitle = document.querySelector('.hero-subtitle');
     const heroCta = document.querySelector('.hero-cta');
     
-    // Master timeline to animate Hero elements immediately
     const masterTl = gsap.timeline();
     
     masterTl.from(heroWords, { 
                 yPercent: 120, 
-                rotationZ: 4,
+                rotationZ: isMobile ? 0 : 4,
                 opacity: 0, 
-                stagger: 0.12, 
-                duration: 1.2, 
+                stagger: 0.1, 
+                duration: 1, 
                 ease: "power4.out",
-                delay: 0.5
+                delay: 0.3
             })
-            .from(heroSubtitle, { y: 30, opacity: 0, filter: "blur(5px)", duration: 1, ease: "power3.out" }, "-=0.9")
-            .from(heroCta, { y: 30, opacity: 0, scale: 0.95, duration: 0.8, ease: "back.out(1.2)" }, "-=0.8");
+            .from(heroSubtitle, { 
+                y: 20, 
+                opacity: 0, 
+                filter: isMobile ? "none" : "blur(5px)", 
+                duration: 0.8, 
+                ease: "power3.out" 
+            }, "-=0.7")
+            .from(heroCta, { 
+                y: 20, 
+                opacity: 0, 
+                scale: 0.98, 
+                duration: 0.6, 
+                ease: "back.out(1.2)" 
+            }, "-=0.6");
 
     // --- Mobile Menu Toggle ---
     const mobileToggle = document.getElementById('mobileToggle');
@@ -43,90 +59,98 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Navbar Scroll Effect ---
+    // --- Throttled Navbar Scroll Effect ---
     const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) navbar.classList.add('scrolled');
-        else navbar.classList.remove('scrolled');
-    });
+    let lastScrollY = window.scrollY;
+    let ticking = false;
 
-    // --- Cinematic Hero Background (Ken Burns Effect) ---
+    window.addEventListener('scroll', () => {
+        lastScrollY = window.scrollY;
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                if (lastScrollY > 50) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+
+    // --- Cinematic Hero Background ---
     const slides = document.querySelectorAll('#heroSlideshow .slide');
-    if (slides.length > 0) {
-        // Apply initial slide zoom for a premium feel
+    if (slides.length > 0 && !isMobile) {
         gsap.to(slides[0], { scale: 1, duration: 6, ease: "none" });
     }
 
-    // --- CRAZY GOOD MOBILE SCROLL ANIMATIONS ---
+    // --- UNIVERSAL SCROLL ANIMATIONS ---
 
-    // 1. Universal Element Fade Ups (Cinematic Blur Reveal)
+    // 1. Element Fade Ups
     const fadeElements = gsap.utils.toArray('.animate-on-scroll:not(.insta-collage):not(.menu-grid):not(.scroll-heading-container):not(.menu-card)');
     fadeElements.forEach(el => {
         gsap.fromTo(el, 
-            { y: 60, opacity: 0, filter: "blur(15px)", scale: 0.95 },
+            { y: 40, opacity: 0, filter: isMobile ? "none" : "blur(10px)", scale: 0.98 },
             {
                 scrollTrigger: {
                     trigger: el,
-                    start: "top 85%",
+                    start: "top 90%",
                     toggleActions: "play none none none"
                 },
                 y: 0,
                 opacity: 1,
                 filter: "blur(0px)",
                 scale: 1,
-                duration: 1.2,
-                ease: "power3.out"
+                duration: 1,
+                ease: "power3.out",
+                clearProps: "filter"
             }
         );
     });
 
-    // 2. Staggered Menu Cards (Creative Scrubbed 3D Fly-In)
+    // 2. Staggered Menu Cards
     const menuCards = gsap.utils.toArray('.menu-card');
     menuCards.forEach((card, i) => {
         gsap.from(card, {
             scrollTrigger: {
                 trigger: card,
                 start: "top 98%", 
-                end: "top 65%", // Dynamic range for creative motion
-                scrub: 0.8,     // Snappy, responsive feel
+                end: "top 70%",
+                scrub: isMobile ? false : 0.8, // Disable scrub on mobile for better performance
             },
-            y: 50,
-            rotationX: 25,  // Restored creative 3D tilt
-            rotationY: i % 2 === 0 ? -10 : 10, // Added side-swing
-            rotationZ: i % 2 === 0 ? -3 : 3,
-            scale: 0.85,    // Creative scale-up
-            transformPerspective: 1200,
+            y: 30,
+            rotationX: isMobile ? 0 : 15,
+            rotationY: isMobile ? 0 : (i % 2 === 0 ? -5 : 5),
+            scale: 0.95,
             opacity: 0,
-            filter: "blur(10px)",
-            ease: "none"
+            duration: isMobile ? 0.8 : 1,
+            filter: isMobile ? "none" : "blur(8px)",
+            ease: isMobile ? "power2.out" : "none",
+            clearProps: "all"
         });
     });
 
-    // 3. Cinematic Clip-Path Reveal for About Image
+    // 3. Clip-Path Reveal for About Image
     const aboutImgFrame = document.querySelector('.img-frame');
     if(aboutImgFrame) {
-        // The outer frame wipes open from the left
         gsap.fromTo(aboutImgFrame, 
             { clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" },
             {
                 clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
                 scrollTrigger: {
                     trigger: '#about',
-                    start: "top 75%",
+                    start: "top 80%",
                 },
-                duration: 1.8,
+                duration: 1.5,
                 ease: "power4.inOut"
             }
         );
         
-        // The inner image floats slowly as you scroll natively
         const innerImg = aboutImgFrame.querySelector('img');
-        if(innerImg) {
+        if(innerImg && !isMobile) {
             gsap.fromTo(innerImg, 
-                { scale: 1.2, y: -30 },
+                { scale: 1.1, y: -20 },
                 {
                     scale: 1.05,
-                    y: 30,
+                    y: 20,
                     scrollTrigger: {
                         trigger: '#about',
                         start: "top bottom",
@@ -139,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 4. Split Heading GSAP Scrub!
+    // 4. Split Heading
     gsap.utils.toArray('.split-heading').forEach(heading => {
         const leftBox = heading.querySelectorAll('.slide-left');
         const rightBox = heading.querySelectorAll('.slide-right');
@@ -149,32 +173,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 trigger: heading,
                 start: "top 100%",
                 end: "bottom 0%",
-                scrub: true
+                scrub: isMobile ? 0.5 : true // Slightly snappier scrub on mobile
             }
         });
         
-        // Exact responsive distance
-        const distance = window.innerWidth * 0.35; 
+        const distance = window.innerWidth * 0.25; 
         
-        // Starts completely split
         tl.fromTo(leftBox, { x: -distance }, { x: 0, ease: "none", duration: 1 }, 0);
         tl.fromTo(rightBox, { x: distance }, { x: 0, ease: "none", duration: 1 }, 0);
         
-        // Exits completely split in the opposite direction
         tl.to(leftBox, { x: distance, ease: "none", duration: 1 });
         tl.to(rightBox, { x: -distance, ease: "none", duration: 1 }, "<");
     });
 
-    // 5. Instagram Polaroid — Mobile-First Cinematic Scroll Gallery
+    // 5. Instagram Gallery
     const instaCollage = document.querySelector('.insta-collage');
     const instaWrappers = gsap.utils.toArray('.insta-pic-wrapper');
     const instaPics = gsap.utils.toArray('.insta-pic');
     
     if (instaCollage && instaWrappers.length > 0) {
-
-        // ═══════════════════════════════════════════════════
-        // ENTRANCE: Animate WRAPPERS (Preserves unique CSS disalignment)
-        // ═══════════════════════════════════════════════════
         const entranceTl = gsap.timeline({
             scrollTrigger: {
                 trigger: instaCollage,
@@ -183,84 +200,43 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Animate WRAPPERS for entrance (staggered fly-in)
         instaWrappers.forEach((wrapper, i) => {
-            const xOffset = i % 2 === 0 ? -50 : 50;
             entranceTl.from(wrapper, {
-                x: xOffset,
-                y: 60,
+                y: 40,
                 opacity: 0,
-                scale: 0.8,
-                filter: "blur(10px)",
-                duration: 1,
+                scale: 0.9,
+                duration: 0.8,
                 ease: "power2.out"
-            }, i * 0.15);
+            }, i * 0.1);
         });
 
+        if (!isMobile) {
+            instaPics.forEach((pic, i) => {
+                const yVal = [ -60, 40, -80, 70 ][i] || 0;
+                const rotVal = [ 8, -6, -5, 6 ][i] || 0;
+                
+                gsap.to(pic, {
+                    y: yVal, 
+                    rotation: rotVal,
+                    scrollTrigger: {
+                        trigger: instaCollage,
+                        start: "top 70%",
+                        end: "bottom 10%",
+                        scrub: 1.5
+                    },
+                    ease: "none"
+                });
+            });
+        }
 
-        // ═══════════════════════════════════════════════════
-        // SCROLL-LINKED MOVEMENT: Animate IMAGES (Scrubbed Parallax)
-        // No property conflict because these target the CHILD elements
-        // ═══════════════════════════════════════════════════
-
-        // Pic 1 → drifts UP
-        gsap.to(instaPics[0], {
-            y: -80, rotation: 10, scale: 1.05,
-            scrollTrigger: {
-                trigger: instaCollage,
-                start: "top 60%",
-                end: "bottom 20%",
-                scrub: 1.5
-            },
-            ease: "none"
-        });
-
-        // Pic 2 → drifts DOWN
-        gsap.to(instaPics[1], {
-            y: 60, rotation: -8, scale: 1.04,
-            scrollTrigger: {
-                trigger: instaCollage,
-                start: "top 60%",
-                end: "bottom 20%",
-                scrub: 1.5
-            },
-            ease: "none"
-        });
-
-        // Pic 3 → drifts UP MORE (fastest)
-        gsap.to(instaPics[2], {
-            y: -110, rotation: -6, scale: 1.06,
-            scrollTrigger: {
-                trigger: instaCollage,
-                start: "top 60%",
-                end: "bottom 20%",
-                scrub: 1.5
-            },
-            ease: "none"
-        });
-
-        // Pic 4 → drifts DOWN the most
-        gsap.to(instaPics[3], {
-            y: 90, rotation: 8, scale: 1.03,
-            scrollTrigger: {
-                trigger: instaCollage,
-                start: "top 60%",
-                end: "bottom 20%",
-                scrub: 1.5
-            },
-            ease: "none"
-        });
-
-        // ═══════════════════════════════════════════════════
-        // BOX SHADOW GLOW: Photos gain a warm glow as they approach center
-        // ═══════════════════════════════════════════════════
+        // Glow effect simplified
         instaPics.forEach(pic => {
             gsap.to(pic, {
-                boxShadow: "0 25px 60px rgba(217, 140, 112, 0.4)",
+                boxShadow: "0 20px 50px rgba(217, 140, 112, 0.3)",
                 scrollTrigger: {
                     trigger: pic,
-                    start: "top 75%",
-                    end: "top 35%",
+                    start: "top 80%",
+                    end: "top 40%",
                     scrub: 1
                 },
                 ease: "none"
@@ -268,4 +244,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
 
